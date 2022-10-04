@@ -1,6 +1,0 @@
-app:
-  name: 'file transferring client'
-  version: '1.0.0'
-
-logger:
-  log_level: 'debug'

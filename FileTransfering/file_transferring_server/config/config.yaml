@@ -1,9 +1,0 @@
-app:
-  name: 'file transferring server'
-  version: '1.0.0'
-
-logger:
-  log_level: 'debug'
-
-network:
-  port: ":8084"
