@@ -9,9 +9,9 @@ import (
 	"os"
 )
 
-var packageSize = 1024
+//var packageSize = 1024
 
-func SendFile(connection connection.Connection, filePath string, logger *logger.Logger) error {
+func SendFile(connection connection.Connection, filePath string, dataLength int, logger *logger.Logger) error {
 	file, err := os.Open(filePath)
 	if err != nil {
 		return err
@@ -22,7 +22,7 @@ func SendFile(connection connection.Connection, filePath string, logger *logger.
 			log.Println("Failed to close file", err)
 		}
 	}(file)
-	data := make([]byte, packageSize)
+	data := make([]byte, dataLength)
 	packetDelivery := make([]byte, 1)
 	for {
 		n, err := file.Read(data)
@@ -70,8 +70,8 @@ func SendFile(connection connection.Connection, filePath string, logger *logger.
 	return nil
 }
 
-func SendFileInfo(connection connection.Connection, filePath string, logger *logger.Logger) error {
-	fileInfo, err := entity.GetFileInfo(filePath)
+func SendFileInfo(connection connection.Connection, filePath string, packetLength int, logger *logger.Logger) error {
+	fileInfo, err := entity.GetFileInfo(filePath, packetLength)
 	if err != nil {
 		return err
 	}

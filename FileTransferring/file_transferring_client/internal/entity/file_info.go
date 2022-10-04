@@ -10,12 +10,13 @@ import (
 )
 
 type FileInfo struct {
-	FileName string `json:"file_name"`
-	FileSize int64  `json:"file_size"`
-	CheckSum []byte `json:"check_sum"`
+	FileName     string `json:"file_name"`
+	FileSize     int64  `json:"file_size"`
+	CheckSum     []byte `json:"check_sum"`
+	PacketLength int    `json:"packet_length"`
 }
 
-func GetFileInfo(filePath string) (FileInfo, error) {
+func GetFileInfo(filePath string, dataLength int) (FileInfo, error) {
 	fileInfo := FileInfo{}
 	fileInfo.FileName = filepath.Base(filePath)
 	size, err := GetFileSize(filePath)
@@ -28,6 +29,12 @@ func GetFileInfo(filePath string) (FileInfo, error) {
 		return FileInfo{}, err
 	}
 	fileInfo.CheckSum = checkSum
+	packet := NewPacket(make([]byte, dataLength))
+	packetJSON, err := packet.Marshal()
+	if err != nil {
+		return FileInfo{}, err
+	}
+	fileInfo.PacketLength = len(packetJSON)
 	return fileInfo, nil
 }
 

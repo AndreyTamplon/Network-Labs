@@ -70,7 +70,7 @@ func (server *Server) handleConnection(conn *connection.Connection, id int) {
 		}
 	}()
 	fileInfo := &entity.FileInfo{}
-	data := make([]byte, 1413)
+	data := make([]byte, 2048)
 	n, err := conn.Read(data)
 	if (err != nil) || (n == 0) {
 		server.logger.Warn("Error %s while reading file info from %s", err, conn.RemoteAddr())
@@ -81,6 +81,8 @@ func (server *Server) handleConnection(conn *connection.Connection, id int) {
 		server.logger.Warn("Error %s while unmarshalling file info from %s", err, conn.RemoteAddr())
 		return
 	}
+	data = make([]byte, fileInfo.PacketLength)
+	n = fileInfo.PacketLength
 	server.logger.Info("File info received from %s", conn.RemoteAddr())
 	file, err := usecase.CreateFile("uploads", fileInfo.FileName, id)
 	if err != nil {

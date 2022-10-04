@@ -19,8 +19,9 @@ type (
 	}
 
 	Network struct {
-		IpAddress string
-		Port      string
+		IpAddress  string
+		Port       string
+		DataLength int `yaml:"data_length" env:"DATA_LENGTH" env-default:"1024"`
 	}
 
 	Data struct {

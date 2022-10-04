@@ -19,7 +19,7 @@ func Run(cfg *config.Config) {
 		}
 	}()
 
-	err := usecase.SendFileInfo(connection, cfg.Data.FilePath, l)
+	err := usecase.SendFileInfo(connection, cfg.Data.FilePath, cfg.DataLength, l)
 	if err != nil {
 		l.Fatal(err)
 	}
@@ -27,7 +27,7 @@ func Run(cfg *config.Config) {
 	if err != nil {
 		l.Fatal(err)
 	}
-	err = usecase.SendFile(connection, cfg.Data.FilePath, l)
+	err = usecase.SendFile(connection, cfg.Data.FilePath, cfg.DataLength, l)
 	if err != nil {
 		l.Fatal(err)
 	}
