@@ -1,0 +1,16 @@
+{
+  "places_api": {
+    "key": "",
+    "url": "https://graphhopper.com/api/1/geocode?q={}&locale={}&key={}",
+    "locale": "en"
+  },
+  "weather_api": {
+    "key": "",
+    "url": "https://api.openweathermap.org/data/2.5/weather?lat={}&lon={}&appid={}"
+  },
+  "attractions_api": {
+    "key": "",
+    "url": "https://api.opentripmap.com/0.1/ru/places/radius?radius={}&lon={}&lat={}&apikey={}",
+    "address_url": "https://api.opentripmap.com/0.1/ru/places/xid/{}?apikey={}"
+  }
+}
